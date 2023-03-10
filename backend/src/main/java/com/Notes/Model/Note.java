@@ -2,9 +2,6 @@ package com.Notes.Model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @Entity
 @Table(name = "Notes")
 public class Note {
@@ -23,13 +20,11 @@ public class Note {
     private String noteData;
 
     public Note(){}
-    public Note(long id, String name, String noteData, String createDate) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-
+    public Note(long id, String name, String creation, String noteData) {
         this.id = id;
         this.name = name;
-        this.createDate = dtf.format(now);
+        this.createDate = creation;
+        this.noteData = noteData;
     }
 
     public long getId() {
