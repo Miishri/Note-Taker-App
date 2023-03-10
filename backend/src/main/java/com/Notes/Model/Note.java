@@ -1,24 +1,30 @@
 package com.Notes.Model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Notes")
 public class Note {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(name = "note_name")
     private String name;
 
-    private String user;
-
-    private String noteName;
-
+    @Column(name = "creation_date")
     private String createDate;
 
+    @Column(name = "note_data")
+    private String noteData;
+
     public Note(){}
-    public Note(long id, String name, String user, String noteName, String createDate) {
+    public Note(long id, String name, String creation, String noteData) {
         this.id = id;
         this.name = name;
-        this.user = user;
-        this.noteName = noteName;
-        this.createDate = createDate;
+        this.createDate = creation;
+        this.noteData = noteData;
     }
 
     public long getId() {
@@ -37,27 +43,15 @@ public class Note {
         this.name = name;
     }
 
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getNoteName() {
-        return noteName;
-    }
-
-    public void setNoteName(String noteName) {
-        this.noteName = noteName;
-    }
-
     public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
+    public String getNoteData() {
+        return noteData;
     }
+    public void setNoteData(String noteData) {
+        this.noteData = noteData;
+    }
+
 }
