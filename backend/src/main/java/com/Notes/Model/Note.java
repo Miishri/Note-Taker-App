@@ -22,8 +22,7 @@ public class Note {
     private String noteData;
 
     public Note(){}
-    public Note(User person, String name, String noteData) {
-        this.id = person.getId();
+    public Note(String name, String noteData) {
         this.name = name;
         this.noteData = noteData;
     }

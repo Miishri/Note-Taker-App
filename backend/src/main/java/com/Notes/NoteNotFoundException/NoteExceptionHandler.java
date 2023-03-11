@@ -15,7 +15,7 @@ public class NoteExceptionHandler {
     @ResponseBody
     public NoteNotFound exceptionHandler(NoteNotFoundException noteException) {
         NoteNotFound noteNotFound = new NoteNotFound();
-        noteNotFound.setMessage("Following note was found");
+        noteNotFound.setMessage("Following note was not found");
         return noteNotFound;
     }
 }
