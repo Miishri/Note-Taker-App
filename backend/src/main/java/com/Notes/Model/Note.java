@@ -2,31 +2,36 @@ package com.Notes.Model;
 
 import jakarta.persistence.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Entity
 @Table(name = "Notes")
 public class Note {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     @Column(name = "note_name")
     private String name;
 
     @Column(name = "creation_date")
-    private String createDate;
+    private String createDate = getCurrentTime();
 
     @Column(name = "note_data")
     private String noteData;
 
     public Note(){}
-    public Note(long id, String name, String creation, String noteData) {
-        this.id = id;
+    public Note(User person, String name, String noteData) {
+        this.id = person.getId();
         this.name = name;
-        this.createDate = creation;
         this.noteData = noteData;
     }
-
+    private String getCurrentTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
     public long getId() {
         return id;
     }
