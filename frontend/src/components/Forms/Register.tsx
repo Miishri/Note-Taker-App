@@ -1,6 +1,6 @@
 import React from 'react';
-import type { RegisterFormUser } from '../interfaces/Register';
-import { ValidateEmail } from '../services/validator.service';
+import type { RegisterFormUser } from '../../interfaces/Register';
+import { ValidateEmail } from '../../services/validator.service';
 import { HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface RegisterFormProps {}
@@ -62,6 +62,8 @@ export class RegisterForm extends React.Component<RegisterFormProps, RegisterFor
     if (Object.keys(errors).length > 0) {
       this.setState({ errors });
     } else {
+      // Success
+      // TODO: Make Request to Register Endpoint with user object
       console.log(user);
     }
   };
