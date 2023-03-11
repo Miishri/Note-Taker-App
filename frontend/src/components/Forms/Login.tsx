@@ -1,26 +1,23 @@
 import React from 'react';
-import type { RegisterFormUser } from '../../interfaces/Forms';
-import { ValidateEmail } from '../../services/validator.service';
+import type { LoginFormUser } from '../../interfaces/Forms';
 import { HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface RegisterFormProps {}
+interface LoginFormProps {}
 
-interface RegisterFormState {
-  user: RegisterFormUser;
+interface LoginFormState {
+  user: LoginFormUser;
   errors: Record<string, string>;
   showPassword: Record<string, boolean>;
 }
 
-export class RegisterForm extends React.Component<RegisterFormProps, RegisterFormState> {
-  constructor(props: RegisterFormProps) {
+export class LoginForm extends React.Component<LoginFormProps, LoginFormState> {
+  constructor(props: LoginFormProps) {
     super(props);
 
     this.state = {
       user: {
         username: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
+        password: ''
       },
       errors: {},
       showPassword: {
@@ -48,16 +45,6 @@ export class RegisterForm extends React.Component<RegisterFormProps, RegisterFor
 
     const { user } = this.state;
     const errors: Record<string, string> = {};
-
-    // Validate email
-    if (!ValidateEmail(user.email)) {
-      errors.email = 'Please enter a valid email address';
-    }
-
-    // Validate password confirmation
-    if (user.password !== user.password_confirmation) {
-      errors.password_confirmation = 'Password confirmation does not match password';
-    }
 
     if (Object.keys(errors).length > 0) {
       this.setState({ errors });
