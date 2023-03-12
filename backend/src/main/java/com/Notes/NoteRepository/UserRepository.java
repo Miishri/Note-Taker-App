@@ -1,9 +1,12 @@
 package com.Notes.NoteRepository;
 
-import com.Notes.Model.Note;
 import com.Notes.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import java.util.Optional;
+import java.util.UUID;
 
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findUserByUsername(String username);
+    User findUserByEmail(String email);
 }

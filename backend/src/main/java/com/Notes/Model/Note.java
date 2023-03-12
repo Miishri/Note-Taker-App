@@ -5,13 +5,20 @@ import jakarta.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "Notes")
 public class Note {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "identifier")
+    private String identifier;
+
     @Column(name = "note_name")
     private String name;
 
@@ -20,6 +27,9 @@ public class Note {
 
     @Column(name = "note_data")
     private String noteData;
+
+    @Column(name = "delete_name")
+    private String deleteName;
 
     public Note(){}
     public Note(String name, String noteData) {
@@ -31,12 +41,27 @@ public class Note {
         Date date = new Date();
         return dateFormat.format(date);
     }
-    public long getId() {
+
+    public String getDeleteName() {
+        return deleteName;
+    }
+    public void setDeleteName(String deleteName) {
+        this.deleteName = deleteName;
+    }
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(UUID id) {
+        this.identifier = id.toString();
     }
 
     public String getName() {

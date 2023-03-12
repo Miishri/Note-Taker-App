@@ -2,6 +2,8 @@ package com.Notes.Model;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "Users")
 public class User {
@@ -11,7 +13,7 @@ public class User {
     private long id;
 
     @Column(name = "unique_id")
-    private long uniqueID;
+    private UUID uniqueID;
 
     @Column(name = "username")
     private String username;
@@ -27,9 +29,7 @@ public class User {
 
     public User() {}
 
-    public User(long id, long uniqueID, String username, String email, String password) {
-        this.id = id;
-        this.uniqueID = uniqueID;
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -41,8 +41,11 @@ public class User {
         return id;
     }
 
-    public long getUniqueID() {
+    public UUID getUniqueID() {
         return uniqueID;
+    }
+    public void setUniqueID(UUID id){
+        this.uniqueID = id;
     }
 
     public String getUsername() {
