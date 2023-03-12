@@ -1,8 +1,8 @@
 import React from 'react';
-import { LoginForm } from './components/Forms/Login';
+import { RegisterForm } from './components/Forms/Register';
 
 function App(): any {
-  return <LoginForm />;
+  return <RegisterForm />;
 }
 
 export default App;
