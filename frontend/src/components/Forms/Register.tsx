@@ -1,6 +1,6 @@
 import React from 'react';
-import type { RegisterFormUser } from '../interfaces/Register';
-import { ValidateEmail } from '../services/validator.service';
+import type { RegisterFormUser } from '../../interfaces/Forms';
+import { ValidateEmail } from '../../services/validator.service';
 import { HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface RegisterFormProps {}
@@ -62,6 +62,8 @@ export class RegisterForm extends React.Component<RegisterFormProps, RegisterFor
     if (Object.keys(errors).length > 0) {
       this.setState({ errors });
     } else {
+      // Success
+      // TODO: Make Request to Register Endpoint with user object
       console.log(user);
     }
   };
@@ -70,7 +72,7 @@ export class RegisterForm extends React.Component<RegisterFormProps, RegisterFor
     const { user, errors, showPassword } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit} className="max-w-lg mx-auto flex flex-col justify-center">
+      <form onSubmit={this.handleSubmit} className="mx-auto flex flex-col justify-center">
         {Object.getOwnPropertyNames(user).map((name, j: number) => {
           const isPasswordVisible = name.startsWith('password') ? showPassword[name] : true;
 
