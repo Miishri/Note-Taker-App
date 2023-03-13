@@ -1,7 +1,21 @@
 package com.Notes.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.jsonwebtoken.Jwts;
 import jakarta.persistence.*;
+import org.springframework.security.crypto.keygen.BytesKeyGenerator;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.sql.Date;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Base64;
 import java.util.UUID;
 
 @Entity
@@ -27,8 +41,15 @@ public class User {
     @Column(name = "role")
     private String role = "USER";
 
+    @Column(name = "salt")
+    private String salt = getSecureRandomKey("k1SH4", 64);
     public User() {}
-
+    public User(long id, String username, String email, String password) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
@@ -71,4 +92,19 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @JsonIgnore
+    @JsonProperty(value = "salt")
+    public String getSalt() {
+        return salt;
+    }
+
+    private static String getSecureRandomKey(String cipher, int keySize) {
+        byte[] secureRandomKeyBytes = new byte[keySize / 8];
+        SecureRandom secureRandom = new SecureRandom();
+        secureRandom.nextBytes(secureRandomKeyBytes);
+        SecretKeySpec spec = new SecretKeySpec(secureRandomKeyBytes, cipher);
+        return Base64.getEncoder().encodeToString(spec.getEncoded());
+    }
+
 }
