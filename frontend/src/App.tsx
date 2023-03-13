@@ -1,8 +1,8 @@
 import React from 'react';
-import { RegisterForm } from './components/Forms/Register';
+import { Navbar } from './components/Navigation/Navbar';
 
 function App(): any {
-  return <RegisterForm />;
+  return <Navbar />;
 }
 
 export default App;
